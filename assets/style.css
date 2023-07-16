@@ -37,6 +37,48 @@ h1{
     list-style-type: none;
     display: flex;
 }
+* {
+    font-family: 'Press Start 2P', cursive;
+}
+
+html ,body{
+}
+
+h1{
+    margin: 0;
+}
+.playspace{
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.versus{
+    background-color: rgba(255, 53, 53, 0.11);
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    align-self:stretch ;
+}
+
+.player{
+    background-color: rgba(0, 255, 255, 0.263);
+    flex: 1;
+}
+.computer{
+    background-color: rgba(238, 130, 238, 0.26);
+    flex: 1;
+}
+.choice_rps{
+    background-color: rgba(0, 0, 255, 0.11);
+    flex: 1;
+}
+
+.choice_rps ul {
+    list-style-type: none;
+    display: flex;
+}
 
 .choice_rps ul li{
     flex: 1;
