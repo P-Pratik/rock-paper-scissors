@@ -81,6 +81,7 @@ function display_round_outcome(result, playerSelect, compSelect) {
 
     cChoice.innerText = `Choice = ${choices[compSelect]}`;
     pChoice.innerText = `Choice = ${choices[playerSelect]}`;
+
     if (result === 0) {
         return `DRAW!! Both of you chose ${choices[playerSelect]}`;
     } else if (result === 1) {
@@ -95,6 +96,10 @@ async function game() {
     var score_comp = 0;
     var score_player = 0;
     var result = 0;
+
+    updateScore(0,0);   //start of the game
+    pChoice.innerText = '';
+    cChoice.innerText = '';
 
     while (score_comp < 5 && score_player < 5) {
         const compSelect = getComputerchoice();
@@ -113,11 +118,11 @@ async function game() {
 
     if (score_player === 5) {
         pResult.innerText = 'YOU WIN!!';
-        replayBlock.appendChild(pResult);
+        replayBlock.prepend(pResult);
         console.log(`YOU HAVE WON THE GAME`);
     } else {
         pResult.innerText = 'YOU LOSE!!';
-        replayBlock.appendChild(pResult);
+        replayBlock.prepend(pResult);
         console.log(`YOU HAVE LOST THE GAME`);
     }
     ReplayMenu();
