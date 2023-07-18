@@ -9,8 +9,7 @@ const cScore = document.querySelector('#compScore');
 const pChoice = document.querySelector('#playerChoice');
 const cChoice = document.querySelector('#compChoice');
 
-const playerBlock = document.querySelector('#player-block');
-const compBlock = document.querySelector('#computer-block');
+const replayBlock = document.querySelector('#replay-content');
 
 const pResult = document.createElement('p');
 
@@ -21,6 +20,16 @@ cScore.innerText = `Score = ${comp_score}`;
 
 }
 
+function ReplayMenu(){
+    const rMenu = document.querySelector('#replayModal');
+    rMenu.style.display = 'block';
+
+    const rButton = document.querySelector('#replayButton');
+    rButton.addEventListener('click' , () => {
+        rMenu.style.display = 'none';
+        game();
+    })
+}
 
 function getComputerchoice() {
     var index = Math.floor(Math.random() * 3); //random = 0 - 1  floating point.
@@ -104,13 +113,14 @@ async function game() {
 
     if (score_player === 5) {
         pResult.innerText = 'YOU WIN!!';
-        playerBlock.appendChild(pResult);
+        replayBlock.appendChild(pResult);
         console.log(`YOU HAVE WON THE GAME`);
     } else {
         pResult.innerText = 'YOU LOSE!!';
-        playerBlock.appendChild(pResult);
+        replayBlock.appendChild(pResult);
         console.log(`YOU HAVE LOST THE GAME`);
     }
+    ReplayMenu();
 }
 
 game();
