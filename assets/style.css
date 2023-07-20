@@ -6,6 +6,7 @@ body{
     background-color: #252933;
     color: #e84c57;
 }
+
 h1{
     margin: 0;
 }
@@ -17,34 +18,40 @@ h1{
     height: 100vh;
 }
 
+.playHeading { 
+    margin: 20px auto;
+    flex:1;
+}
+
 .versus{
     display: flex;
     flex-direction: row;
-    flex: 5;
+    flex: 7;
     align-self:stretch ;
 }
 
 .player , .computer {
-
     margin: 50px 0px;
     padding: 20px;
     flex: 1;
     display:flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 20px;
+    gap: 50px;
     align-items: center;
 
 }
 
 .choice_rps{
-    flex: 1;
+    margin: auto;
+    flex: 2;
 }
 
 .choice_rps ul {
     margin : 0;
     padding : 0;
     list-style-type: none;
+    gap: 100px;
     display: flex;
     justify-content: space-evenly;
 }
@@ -67,7 +74,8 @@ button{
 }
 
 button:hover{
-    background-color: rgb(255, 217, 0, 0.8);
+    color: rgb(255, 217, 0);
+    border-color: rgb(255, 217, 0);
 }
 
 .modal {

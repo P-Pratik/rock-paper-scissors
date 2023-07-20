@@ -1,4 +1,3 @@
-console.log('hello');
 const rockBtn = document.querySelector('#rock-btn');
 const paperBtn = document.querySelector('#paper-btn');
 const scissorBtn = document.querySelector('#scissor-btn');
@@ -13,21 +12,29 @@ const replayBlock = document.querySelector('#replay-content');
 
 const pResult = document.createElement('p');
 
+let game_status = 1;
+
 function updateScore(player_score, comp_score) {
 
-pScore.innerText = `Score = ${player_score}`;
-cScore.innerText = `Score = ${comp_score}`;
+    pScore.innerText = `Score = ${player_score}`;
+    cScore.innerText = `Score = ${comp_score}`;
 
 }
 
-function ReplayMenu(){
+function ReplayMenu() {
     const rMenu = document.querySelector('#replayModal');
     rMenu.style.display = 'block';
 
     const rButton = document.querySelector('#replayButton');
-    rButton.addEventListener('click' , () => {
+    const sButton = document.querySelector('#stopButton');
+    rButton.addEventListener('click', () => {
         rMenu.style.display = 'none';
-        game();
+        game_status = 1;
+    })
+
+    sButton.addEventListener('click', () => {
+        game_status = 0;
+        rMenu.style.display = 'none';
     })
 }
 
@@ -89,43 +96,84 @@ function display_round_outcome(result, playerSelect, compSelect) {
     } else {
         return `YOU LOSE!! Your Choice = ${choices[playerSelect]} and Computer = ${choices[compSelect]}`;
     }
-    
+
 }
 
+// async function game() {
+//     var score_comp = 0;
+//     var score_player = 0;
+//     var result = 0;
+
+//     updateScore(0,0);   //start of the game
+//     pChoice.innerText = '';
+//     cChoice.innerText = '';
+
+//     while (score_comp < 5 && score_player < 5) {
+//         let compSelect = getComputerchoice();
+//         let playerSelect = await playerChoice();
+
+//         result = playRound(playerSelect, compSelect);
+
+//         if (result === 1) {
+//             score_player++;
+//         } else if (result === 2) {
+//             score_comp++;
+//         }
+//         updateScore(score_player,score_comp);
+//         console.log(display_round_outcome(result, playerSelect, compSelect));
+//     }
+
+//     if (score_player === 5) {
+//         pResult.innerText = 'YOU WIN!!';
+//         replayBlock.prepend(pResult);
+//         console.log(`YOU HAVE WON THE GAME`);
+//     } else {
+//         pResult.innerText = 'YOU LOSE!!';
+//         replayBlock.prepend(pResult);
+//         console.log(`YOU HAVE LOST THE GAME`);
+//     }
+//     ReplayMenu();
+// }
+
+
 async function game() {
-    var score_comp = 0;
-    var score_player = 0;
-    var result = 0;
+    
+    while (game_status === 1) {
+        let score_comp = 0;
+        let score_player = 0;
+        let result = 0;
 
-    updateScore(0,0);   //start of the game
-    pChoice.innerText = '';
-    cChoice.innerText = '';
+        updateScore(0, 0);   //start of the game
+        pChoice.innerText = '';
+        cChoice.innerText = '';
 
-    while (score_comp < 5 && score_player < 5) {
-        const compSelect = getComputerchoice();
-        const playerSelect = await playerChoice();
+        while (score_comp < 5 && score_player < 5) {
+            let compSelect = getComputerchoice();
+            let playerSelect = await playerChoice();
 
-        result = playRound(playerSelect, compSelect);
+            result = playRound(playerSelect, compSelect);
 
-        if (result === 1) {
-            score_player++;
-        } else if (result === 2) {
-            score_comp++;
+            if (result === 1) {
+                score_player++;
+            } else if (result === 2) {
+                score_comp++;
+            }
+            updateScore(score_player, score_comp);
+            console.log(display_round_outcome(result, playerSelect, compSelect));
         }
-        updateScore(score_player,score_comp);
-        console.log(display_round_outcome(result, playerSelect, compSelect));
-    }
 
-    if (score_player === 5) {
-        pResult.innerText = 'YOU WIN!!';
-        replayBlock.prepend(pResult);
-        console.log(`YOU HAVE WON THE GAME`);
-    } else {
-        pResult.innerText = 'YOU LOSE!!';
-        replayBlock.prepend(pResult);
-        console.log(`YOU HAVE LOST THE GAME`);
+
+        if (score_player === 5) {
+            pResult.innerText = 'YOU WIN!!';
+            replayBlock.prepend(pResult);
+            console.log(`YOU HAVE WON THE GAME`);
+        } else {
+            pResult.innerText = 'YOU LOSE!!';
+            replayBlock.prepend(pResult);
+            console.log(`YOU HAVE LOST THE GAME`);
+        }
+        ReplayMenu();
     }
-    ReplayMenu();
 }
 
 game();
